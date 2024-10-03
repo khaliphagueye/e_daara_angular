@@ -1,0 +1,158 @@
+<div id="mainContentWithHeader">
+  <div id="pre-main-part">
+    <!-- Contenu préliminaire ici -->
+  </div>
+
+  <div id="dashboard-courses-above-recommended-courses">
+    <div id="disclaimers-target-container"></div>
+
+    <section id="courses-taken">
+      <h1 class="secondTitle">Cours suivis</h1>
+      <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Cours</th>
+              <th scope="col">Inscription</th>
+              <th scope="col">Progression</th>
+              <th scope="col">Certificat</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Programmez en JAVA</th>
+              <td>20/09/2024</td>
+              <td>5%</td>
+              <td><i class="bi bi-mortarboard"></i></td>
+            </tr>
+            <tr>
+              <th scope="row">Maitrisez les base de données SQL</th>
+              <td>22/09/2024</td>
+              <td>15%</td>
+              <td><i class="bi bi-mortarboard"></i></td>
+            </tr>
+            <tr>
+              <th scope="row">Apprendre à Apprendre</th>
+              <td>25/09/2024</td>
+              <td>0%</td>
+              <td><i class="bi bi-mortarboard"></i></td>
+            </tr>
+          </tbody>
+        </table>
+
+
+<style>
+/* Conteneur principal */
+#mainContentWithHeader {
+  padding: 20px;
+  background-color: #f9f9f9; /* Couleur de fond douce */
+}
+
+/* Styles pour le titre des sections */
+.secondTitle {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+/* Styles pour le tableau */
+.dashboardTable {
+  width: 100%;
+  border-collapse: collapse; /* Évite les espaces entre les bordures */
+  margin-bottom: 30px;
+}
+
+.dashboardTable__header {
+  background-color: #4CAF50; /* Couleur de fond de l'en-tête */
+  color: white; /* Couleur du texte de l'en-tête */
+}
+
+.dashboardTable__header th {
+  padding: 12px;
+  text-align: left;
+}
+
+.dashboardTable__infoSecondary {
+  color: #777; /* Couleur du texte secondaire */
+}
+
+.dashboardTable__progressBar {
+  width: 150px; /* Largeur fixe pour la barre de progression */
+}
+
+/* Styles pour la barre de progression */
+.progressbar {
+  background-color: #e0e0e0; /* Couleur de fond de la barre */
+  border-radius: 5px; /* Coins arrondis */
+  overflow: hidden; /* Évite que la barre dépasse */
+}
+
+.progressbar__rate {
+  position: absolute;
+  color: white; /* Couleur du texte */
+  text-align: center;
+  line-height: 30px; /* Centrer verticalement le texte */
+}
+
+.progressbar__barWrapper {
+  width: 100%;
+  height: 30px; /* Hauteur de la barre */
+}
+
+.progressbar__bar {
+  height: 100%;
+  background-color: #4CAF50; /* Couleur de la barre */
+  transition: width 0.3s; /* Animation de la barre de progression */
+}
+
+/* Styles pour les certificats */
+.thumbnailList {
+  display: flex;
+  flex-wrap: wrap; /* Permet de passer à la ligne suivante si nécessaire */
+  list-style-type: none; /* Enlève les puces */
+  padding: 0; /* Enlève le padding */
+}
+
+.thumbnailList__item {
+  flex: 1 1 30%; /* Équilibre la taille des éléments */
+  margin: 10px; /* Espacement entre les certificats */
+  border: 1px solid #ddd; /* Bordure autour de chaque certificat */
+  border-radius: 8px; /* Coins arrondis */
+  overflow: hidden; /* Évite que le contenu déborde */
+  background-color: white; /* Couleur de fond des certificats */
+  transition: box-shadow 0.3s; /* Animation de l'ombre */
+}
+
+.thumbnailList__item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre au survol */
+}
+
+.courseHit {
+  text-decoration: none; /* Enlève le soulignement des liens */
+  color: inherit; /* Hérite de la couleur du texte */
+}
+
+/* Style pour l'illustration du certificat */
+.courseHit__illustration {
+  height: 150px; /* Hauteur fixe pour l'image */
+  background-size: cover; /* Recouvre entièrement le conteneur */
+  background-position: center; /* Centre l'image */
+}
+
+/* Styles pour le bouton de partage */
+.button {
+  padding: 10px 15px;
+  background-color: #007BFF; /* Couleur de fond du bouton */
+  color: white; /* Couleur du texte du bouton */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer; /* Curseur main */
+  transition: background-color 0.3s; /* Animation de la couleur */
+}
+
+.button:hover {
+  background-color: #0056b3; /* Couleur au survol */
+}
+
+
+
+</style>
