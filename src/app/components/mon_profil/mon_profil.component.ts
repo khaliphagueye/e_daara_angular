@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
+import { CommonModule } from '@angular/common';
+
+interface Documents {
+  title: string;
+  contenu: string;
+  date_ajout: string;
+}
+
 @Component({
   standalone: true,
   templateUrl: './mon_profil.component.html' // Chemin relatif correct

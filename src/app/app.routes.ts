@@ -6,6 +6,7 @@ import { Mes_documentsComponent } from './components/mes_documents/mes_documents
 import { Mon_portfolioComponent } from './components/mon_portfolio/mon_portfolio.component';
 import { Mon_profilComponent } from './components/mon_profil/mon_profil.component';
 import { Ma_classe_en_directComponent } from './components/ma_classe_en_direct/ma_classe_en_direct.component';
+import { UtilisateursComponent } from './components/utilisateurs/utilisateurs.component';
 import { AdminComponent } from './components/admin/admin.component';
 
 export const routes: Routes = [
@@ -31,6 +32,10 @@ export const routes: Routes = [
                 component: DashboardComponent
             },
             { 
+                path: 'dashboard',
+                component: DashboardComponent
+            },
+            { 
                 path: 'mes_cours',
                 component: Mes_coursComponent
             },
@@ -49,6 +54,10 @@ export const routes: Routes = [
             { 
                 path: 'ma_classe_en_direct',
                 component: Ma_classe_en_directComponent
+            },
+            { 
+                path: 'utilisateurs',
+                component: UtilisateursComponent
             }
         ]
     }

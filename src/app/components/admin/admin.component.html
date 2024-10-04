@@ -99,7 +99,7 @@
                                 <p>Accueil</p>
                             </a> </li>
                         <li class="nav-item"> <a [routerLink]="['/admin/mes_cours']" class="nav-link"> <i class="bi bi-book"></i>
-                                <p>Mes cours</p>
+                                <p>Gestion des cours</p>
                             </a> </li>
                         <li class="nav-item"> <a [routerLink]="['/admin/mes_documents']" class="nav-link"> <i class="bi bi-stickies"></i>
                                 <p>Mes documents</p>
@@ -118,13 +118,17 @@
                                 <p>Mon profil</p>
                             </a> 
                         </li>
-                        <br><br>
-                       <li class="nav-item"> <a href="./generate/theme.html" class="nav-link"> <i class="bi bi-box-arrow-up-left"></i>
-                                <p>Se deconnecter</p>
+                        <li class="nav-item"> <a [routerLink]="['/admin/utilisateurs']" class="nav-link"> <i class="bi bi-person-square"></i>
+                                <p>Gestion des utilisateurs</p>
                             </a> 
                         </li>
+                        <br>
+                      <!--button (click)="onLogout()">Déconnexion</button-->
                         
-                               
+                      <li class="nav-item"> <a href="./generate/theme.html" class="nav-link"> <i class="bi bi-box-arrow-up-left"></i>
+                        <p>Se deconnecter</p>
+                    </a> 
+                </li>      
                         
 
 
