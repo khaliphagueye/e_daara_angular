@@ -1,0 +1,23 @@
+<form>
+  <label>
+    Titre:
+    <input [(ngModel)]="selectedCourse.titre" name="titre" />
+  </label>
+  <label>
+    Module:
+    <input [(ngModel)]="selectedCourse.module" name="module" />
+  </label>
+  <label>
+    Contenu:
+    <textarea [(ngModel)]="selectedCourse.contenu" name="contenu"></textarea>
+  </label>
+  <label>
+    Niveau:
+    <input [(ngModel)]="selectedCourse.niveau" name="niveau" />
+  </label>
+  <label>
+    Prérequis:
+    <input [(ngModel)]="selectedCourse.prerequis" name="prerequis" />
+  </label>
+  <button type="button" (click)="updateCourse()">Enregistrer les modifications</button>
+</form>

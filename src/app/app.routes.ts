@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { Mes_coursComponent } from './components/mes_cours/mes_cours.component';
+import { CoursDetailsComponent } from './components/mes_cours/cours-details/cours-details.component';
 import { Mes_documentsComponent } from './components/mes_documents/mes_documents.component';
 import { Mon_portfolioComponent } from './components/mon_portfolio/mon_portfolio.component';
 import { Mon_profilComponent } from './components/mon_profil/mon_profil.component';
@@ -12,16 +13,11 @@ import { AdminComponent } from './components/admin/admin.component';
 export const routes: Routes = [
     { 
         path: '',
-        redirectTo: '/admin', // Rediriger vers le tableau de bord par défaut
-        pathMatch: 'full'
+        component: LoginComponent
     },
     { 
         path: 'login',
         component: LoginComponent
-    },
-    { 
-        path: 'dashboard',
-        component: DashboardComponent // Route vers le tableau de bord
     },
     { 
         path: 'admin',
@@ -38,6 +34,10 @@ export const routes: Routes = [
             { 
                 path: 'mes_cours',
                 component: Mes_coursComponent
+            },
+            { 
+                path: 'cours-details/:id',
+                component: CoursDetailsComponent
             },
             { 
                 path: 'mes_documents',

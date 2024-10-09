@@ -1,18 +1,28 @@
-import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';  
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'; // Import de HttpClientModule
-
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 import { AppComponent } from './app.component';
+import { Mes_coursComponent } from './components/mes_cours/mes_cours.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { AjouterCoursDialogComponent } from './components/mes_cours/ajouter-cours-dialog/ajouter-cours-dialog.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent // Déclaration d'AppComponent uniquement
   ],
   imports: [
     BrowserModule,
-    HttpClientModule // Ajout du module HttpClient
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    Mes_coursComponent, // Ajoutez votre composant ici
+    MatDialogModule, // Assurez-vous que le MatDialogModule est importé
+    FormsModule,
+    AjouterCoursDialogComponent // Ajoutez votre composant de dialogue ici
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent] // Ajout du bootstrap de votre AppComponent
 })
 export class AppModule { }
