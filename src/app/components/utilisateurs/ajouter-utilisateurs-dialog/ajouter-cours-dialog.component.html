@@ -1,0 +1,29 @@
+<h2>Ajouter un Cours</h2>
+<form (ngSubmit)="onSubmit()" #courseForm="">
+  <div>
+    <label for="titre">Titre</label>
+    <input type="text" id="titre" required  name="titre">
+  </div>
+  
+  <div>
+    <label for="module">Module</label>
+    <input type="text" id="module" required  name="module">
+  </div>
+
+  <div>
+    <label for="contenu">Contenu</label>
+    <textarea id="contenu" required  name="contenu"></textarea>
+  </div>
+
+  <div>
+    <label for="niveau">Niveau</label>
+    <input type="text" id="niveau" required  name="niveau">
+  </div>
+
+  <div>
+    <label for="prerequis">Prérequis</label>
+    <input type="text" id="prerequis" required  name="prerequis">
+  </div>
+
+  <button type="submit">Ajouter Cours</button>
+</form>

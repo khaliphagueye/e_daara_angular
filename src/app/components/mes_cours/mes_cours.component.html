@@ -1,14 +1,16 @@
-<div id="mainContentWithHeader">  
-  <div id="pre-main-part">
-    <h2 class="section-title">La Gestion des cours</h2>
+<div id="mainContentWithHeader" class="main-content">
+  <div id="pre-main-part" class="header-section">
+    <h2 class="section-title">La Gestion des Cours</h2>
     <hr class="hr hr-blurry" />
-    <button type="button" class="btn btn-outline-info">Ajouter un cours</button>
+    <!--button type="button" class="btn btn-outline-info add-course-btn">Ajouter un cours</button-->
   </div>
-  <br>
+
+  <br />
+
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8 course-table">
           <!-- Id Column -->
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
@@ -52,8 +54,12 @@
               <button type="button" class="btn btn-primary" (click)="navigateToCourseDetails(cours.id)">
                 <i class="bi bi-eye-fill"></i>
               </button>&nbsp;
-              <button type="button" class="btn btn-success"><i class="bi bi-pencil-square"></i></button>&nbsp;
-              <button type="button" class="btn btn-danger"  (click)="deleteCourse(cours.id)"><i class="bi bi-trash3-fill"></i></button>
+              <button type="button" class="btn btn-success" (click)="loadCourseDetails(cours.id)">
+                <i class="bi bi-pencil-square"></i>
+              </button>&nbsp;
+              <button type="button" class="btn btn-danger" (click)="deleteCourse(cours.id)">
+                <i class="bi bi-trash3-fill"></i>
+              </button>
             </td>
           </ng-container>
 
@@ -63,40 +69,152 @@
         </table>
 
         <!-- Paginator -->
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
-        </mat-paginator>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements"></mat-paginator>
       </div>
     </div>
   </div>
 </div>
- <!-- Formulaire pour ajouter un nouveau cours -->
- <h3>Ajouter un nouveau cours</h3>
 
- <form (ngSubmit)="onSubmit()">
-   <div>
-     <label for="titre">Titre</label>
-     <input type="text" id="titre" [(ngModel)]="newCours.titre" name="titre" required>
-   </div>
- 
-   <div>
-     <label for="module">Module</label>
-     <input type="text" id="module" [(ngModel)]="newCours.module" name="module" required>
-   </div>
- 
-   <div>
-     <label for="contenu">Contenu</label>
-     <textarea id="contenu" [(ngModel)]="newCours.contenu" name="contenu" required></textarea>
-   </div>
- 
-   <div>
-     <label for="niveau">Niveau</label>
-     <input type="text" id="niveau" [(ngModel)]="newCours.niveau" name="niveau" required>
-   </div>
- 
-   <div>
-     <label for="prerequis">Prérequis</label>
-     <input type="text" id="prerequis" [(ngModel)]="newCours.prerequis" name="prerequis" required>
-   </div>
- 
-   <button type="submit" class="btn btn-primary">Ajouter Cours</button>
- </form>
+<div  class="small-card">
+<!-- Formulaire pour ajouter un nouveau cours -->
+<h3 class="form-title small fs-4"  style=" position: relative; /* or absolute */
+left: 1%;
+top: 50%;">Ajouter un Nouveau Cours</h3>
+
+<form (ngSubmit)="onSubmit()" class="course-form">
+  <div class="form-group">
+    <label for="titre">Titre</label>
+    <input type="text" id="titre" [(ngModel)]="newCours.titre" name="titre" required class="form-control" />
+  </div>
+
+  <div class="form-group">
+    <label for="module">Module</label>
+    <input type="text" id="module" [(ngModel)]="newCours.module" name="module" required class="form-control" />
+  </div>
+
+  <div class="form-group">
+    <label for="contenu">Contenu</label>
+    <textarea id="contenu" [(ngModel)]="newCours.contenu" name="contenu" required class="form-control"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="niveau">Niveau</label>
+    <input type="text" id="niveau" [(ngModel)]="newCours.niveau" name="niveau" required class="form-control" />
+  </div>
+
+  <div class="form-group">
+    <label for="prerequis">Prérequis</label>
+    <input type="text" id="prerequis" [(ngModel)]="newCours.prerequis" name="prerequis" required class="form-control" />
+  </div>
+
+  <button type="submit" class="btn btn-primary">Ajouter Cours</button>
+</form>
+</div>
+
+<!-- Affichage des détails du cours sélectionné avec formulaire pour modification -->
+<div *ngIf="selectedCourse" style="max-width: 1100px; /* Ajustez la largeur selon vos besoins */
+top: 10px;
+margin: 0 auto; /* Centrer la carte */
+padding: 0px;" class="course-details">
+  <h2 class="form-title small fs-4" style=" position: relative; /* or absolute */
+  left: 1%;
+  top: 50%;">Modifier un cours</h2>
+  <form>
+    <div class="form-group">
+      <label>Titre:</label>
+      <input [(ngModel)]="selectedCourse.titre" name="titre" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label>Module:</label>
+      <input [(ngModel)]="selectedCourse.module" name="module" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label>Contenu:</label>
+      <textarea [(ngModel)]="selectedCourse.contenu" name="contenu" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+      <label>Niveau:</label>
+      <input [(ngModel)]="selectedCourse.niveau" name="niveau" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label>Prérequis:</label>
+      <input [(ngModel)]="selectedCourse.prerequis" name="prerequis" class="form-control" />
+    </div>
+    <button type="button" class="btn btn-success" (click)="updateCourse()">Enregistrer les modifications</button>
+    &nbsp;<button type="button" class="btn btn-secondary" (click)="clearCourseDetails()">Fermer</button>
+  </form>
+</div>
+
+<style>
+.small-card {
+  max-width: 1100px; /* Ajustez la largeur selon vos besoins */
+  top: 10px;
+  margin: 0 auto; /* Centrer la carte */
+  padding: 0px; /* Ajoutez un peu de padding pour l'aération */
+}
+
+
+.main-content {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.header-section {
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 1.8rem;
+  color: #007bff;
+}
+
+.hr {
+  border: 0;
+  height: 1px;
+  background: #007bff;
+  opacity: 0.6;
+}
+
+.add-course-btn {
+  margin-top: 10px;
+}
+
+.course-table {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.form-title {
+  margin-top: 30px;
+  color: #007bff;
+}
+
+.course-form, .course-details {
+  background: white;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.btn {
+  margin-top: 10px;
+}
+</style>

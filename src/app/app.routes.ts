@@ -9,6 +9,7 @@ import { Mon_profilComponent } from './components/mon_profil/mon_profil.componen
 import { Ma_classe_en_directComponent } from './components/ma_classe_en_direct/ma_classe_en_direct.component';
 import { UtilisateursComponent } from './components/utilisateurs/utilisateurs.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { CoursContenuComponent } from './components/mes_cours/cours-contenu/cours-contenu.component';
 
 export const routes: Routes = [
     { 
@@ -38,6 +39,10 @@ export const routes: Routes = [
             { 
                 path: 'cours-details/:id',
                 component: CoursDetailsComponent
+            },
+            { 
+                path: 'cours-contenu/:id',
+                component: CoursContenuComponent
             },
             { 
                 path: 'mes_documents',

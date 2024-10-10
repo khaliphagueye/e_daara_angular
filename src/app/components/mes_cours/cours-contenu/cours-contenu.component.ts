@@ -5,13 +5,13 @@ import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-cours-details',
+  selector: 'app-cours-contenu',
   standalone: true,
   imports: [CommonModule,MatCardModule], // Ajouter CommonModule ici
-  templateUrl: './cours-details.component.html',
-  styleUrls: ['./cours-details.component.css']
+  templateUrl: './cours-contenu.component.html',
+  styleUrls: ['./cours-contenu.component.css']
 })
-export class CoursDetailsComponent implements OnInit {
+export class CoursContenuComponent implements OnInit {
   coursId!: string;
   course: any; // ou remplacez par le type Cours si vous l'avez défini
 

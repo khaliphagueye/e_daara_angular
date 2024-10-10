@@ -1,97 +1,222 @@
-<div id="mainContentWithHeader"> 
-  <div id="pre-main-part">
-    <h2 class="section-title">Gestion des utilisateurs</h2>
-    
+<div id="mainContentWithHeader" class="main-content"> 
+  <div id="pre-main-part" class="header-section">
+    <h2 class="section-title">Gestion des Utilisateurs</h2>
+    <hr class="hr hr-blurry" />
   </div>
 
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th scope="col">Prénom</th>
-              <th scope="col">Nom</th>
-              <th scope="col">Email</th>
-              <th scope="col">Specialité</th>
-              <th scope="col">Profession</th>
-              <th scope="col">Profil</th>
-              <th scope="col">Statut</th>
-              <th scope="col">Sexe</th>
-              <th scope="col">Statut</th>
-              <th scope="col">Biographie</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let utilisateurs of utilisateurs">
-              <th scope="row">{{ utilisateurs.prenom }}</th>
-              <td>{{ utilisateurs.nom }}</td>
-              <td>{{ utilisateurs.email }}</td>
-              <td>{{ utilisateurs.specialite }}</td>
-              <td>{{ utilisateurs.profession }}</td>
-              <td>{{ utilisateurs.profil }}</td>
-              <td>{{ utilisateurs.sexe }}</td>
-              <td>{{ utilisateurs.statut }}</td>
-              <td>{{ utilisateurs.biographie }}</td>
-              <td>
-                <button type="button" class="btn btn-primary"><i class="bi bi-eye-fill"></i></button>&nbsp;
-                <button type="button" class="btn btn-success"><i class="bi bi-pencil-square"></i></button>&nbsp;
-                <button type="button" class="btn btn-danger"><i class="bi bi-trash3-fill"></i></button>
-              </td>
-            </tr>
-          </tbody>
+        <!-- Tableau pour afficher les utilisateurs -->
+        <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8 user-table">
+          <!-- Id Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+            <td mat-cell *matCellDef="let user"> {{ user.id }} </td>
+          </ng-container>
+
+          <!-- Nom Column -->
+          <ng-container matColumnDef="nom">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom </th>
+            <td mat-cell *matCellDef="let user"> {{ user.nom }} </td>
+          </ng-container>
+
+          <!-- Prénom Column -->
+          <ng-container matColumnDef="prenom">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Prénom </th>
+            <td mat-cell *matCellDef="let user"> {{ user.prenom }} </td>
+          </ng-container>
+
+          <!-- Email Column -->
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+            <td mat-cell *matCellDef="let user"> {{ user.email }} </td>
+          </ng-container>
+
+          <!-- TypeUtilisateur Column -->
+          <ng-container matColumnDef="typeUtilisateur">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Type Utilisateur </th>
+            <td mat-cell *matCellDef="let user"> {{ user.typeUtilisateur }} </td>
+          </ng-container>
+
+
+          <!-- Roles Column -->
+          <ng-container matColumnDef="roles">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Rôles </th>
+            <td mat-cell *matCellDef="let user"> {{ user.roles }} </td>
+          </ng-container>
+
+          <!-- Roles Column -->
+          <ng-container matColumnDef="profession">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Profession </th>
+            <td mat-cell *matCellDef="let user"> {{ user.profession }} </td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let user">
+              <button type="button" class="btn btn-primary" (click)="navigateToUtilisateurDetails(user.id)">
+                <i class="bi bi-eye-fill"></i>
+              </button>&nbsp;
+              <button type="button" class="btn btn-success" (click)="loadUtilisateurDetails(user.id)">
+                <i class="bi bi-pencil-square"></i>
+              </button>&nbsp;
+              <button type="button" class="btn btn-danger" (click)="deleteUtilisateur(user.id)">
+                <i class="bi bi-trash3-fill"></i>
+              </button>
+            </td>
+          </ng-container>
+
+          <!-- Header and Row Definitions -->
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+
+        <!-- Paginator -->
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements"></mat-paginator>
       </div>
     </div>
   </div>
 </div>
 
+<!-- Formulaire pour ajouter un nouvel utilisateur -->
+<div class="small-card">
+  <h3 class="form-title small fs-4">Ajouter un Nouvel Utilisateur</h3>
+  <form (ngSubmit)="onSubmit()" class="user-form">
+    <div class="form-group">
+      <label for="nom">Nom</label>
+      <input type="text" id="nom" [(ngModel)]="newUtilisateur.nom" name="nom" required class="form-control" />
+    </div>
 
+    <div class="form-group">
+      <label for="prenom">Prénom</label>
+      <input type="text" id="prenom" [(ngModel)]="newUtilisateur.prenom" name="prenom" required class="form-control" />
+    </div>
 
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" [(ngModel)]="newUtilisateur.email" name="email" required class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="typeUtilisateur">Type d'Utilisateur</label>
+      <input type="text" id="typeUtilisateur" [(ngModel)]="newUtilisateur.typeUtilisateur" name="typeUtilisateur" required class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="roles">Roles</label>
+      <input type="text" id="roles" [(ngModel)]="newUtilisateur.roles" name="roles" required class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="profession">Roles</label>
+      <input type="text" id="profession" [(ngModel)]="newUtilisateur.profession" name="profession" required class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Ajouter Utilisateur</button>
+  </form>
+</div>
+
+<!-- Affichage des détails de l'utilisateur sélectionné avec formulaire pour modification -->
+<div *ngIf="selectedUtilisateur" style="max-width: 1100px; top: 10px; margin: 0 auto; padding: 0px;" class="user-details">
+  <h2 class="form-title small fs-4">Modifier un utilisateur</h2>
+  <form>
+    <div class="form-group">
+      <label>Nom:</label>
+      <input [(ngModel)]="selectedUtilisateur.nom" name="nom" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label>Prénom:</label>
+      <input [(ngModel)]="selectedUtilisateur.prenom" name="prenom" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label>Email:</label>
+      <input [(ngModel)]="selectedUtilisateur.email" name="email" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label>Type d'Utilisateur:</label>
+      <input [(ngModel)]="selectedUtilisateur.typeUtilisateur" name="typeUtilisateur" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label>Roles:</label>
+      <input [(ngModel)]="selectedUtilisateur.roles" name="roles" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label>Profession</label>
+      <input [(ngModel)]="selectedUtilisateur.profession" name="profession" class="form-control" />
+    </div>
+    <button type="button" class="btn btn-success" (click)="updateUtilisateur()">Enregistrer les modifications</button>
+    &nbsp;<button type="button" class="btn btn-secondary" (click)="clearUtilisateurDetails()">Fermer</button>
+  </form>
+</div>
+
+<!-- Style pour les éléments -->
 <style>
-  
-.container {
-padding: 2rem 0rem;
+.small-card {
+  max-width: 1100px;
+  top: 10px;
+  margin: 0 auto;
+  padding: 0px;
 }
 
-h4 {
-margin: 2rem 0rem 1rem;
-}
-
-.table-image {
-td, th {
-  vertical-align: middle;
-}
-}
-
-
-
-#mainContentWithHeader {
+.main-content {
   padding: 20px;
+  background-color: #f9f9f9;
 }
 
-.secondTitle {
-  font-size: 1.5em;
+.header-section {
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 1.8rem;
+  color: #007bff;
+}
+
+.hr {
+  border: 0;
+  height: 1px;
+  background: #007bff;
+  opacity: 0.6;
+}
+
+.user-table {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.form-title {
+  margin-top: 30px;
+  color: #007bff;
+}
+
+.user-form, .user-details {
+  background: white;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.form-group {
   margin-bottom: 15px;
-  color: #333;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
   font-weight: bold;
 }
 
-.img-fluid {
-  border-radius: 50%;
-  max-width: 100%;
-  height: auto;
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 
-#dashboard-courses-above-recommended-courses {
-  margin-top: 20px;
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 10px;
+.btn {
+  margin-top: 10px;
 }
-
-#courses-taken {
-  text-align: center;
-}
-
 </style>
