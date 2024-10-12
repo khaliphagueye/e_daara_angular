@@ -1,4 +1,5 @@
 export interface Cours {
+
 titre: any;
   id: number;
   title: string;
@@ -8,6 +9,8 @@ titre: any;
   prerequis: string;
   mot_cle: string;
   duree: string;
+  fichier: string;
+  
 
   // autres propriétés...
 }

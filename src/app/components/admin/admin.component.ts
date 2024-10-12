@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { FormsModule } from '@angular/forms';
 
 //import { AuthService } from '../../services/auth.service'; // Assure-toi d'importer le service
 
 @Component({
   standalone: true,
   templateUrl: './admin.component.html', // Chemin relatif correct
-  imports: [RouterLink, RouterOutlet]
+  imports: [RouterLink, RouterOutlet,FormsModule]
 })
 export class AdminComponent implements OnInit {
 
@@ -20,4 +22,10 @@ export class AdminComponent implements OnInit {
   //onLogout() {
    // this.authService.logout(); // Appeler la méthode de déconnexion du service
   //}
+
+  constructor(private authService: AuthService) {}
+
+  onLogout() {
+    this.authService.logout(); // Déconnexion de l'utilisateur
+  }
 }

@@ -30,79 +30,71 @@
         <br>
 
 <!--div>de</div-->
-<div id="mainContentWithHeader" class="main-content"> 
-  <div id="pre-main-part" class="header-section">
-    <h2 class="section-title">La Gestion des Cours</h2>
-    <hr class="hr hr-blurry" />
-  </div>
+<div class="container-xl">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="section-title">La Gestion des Cours</h2>
+      <hr class="hr hr-blurry" />
+      <div id="courseCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+        <!-- Carousel indicators -->
+        <ol class="carousel-indicators">
+          <li *ngFor="let chunk of coursChunks; let i = index" data-target="#courseCarousel" [attr.data-slide-to]="i" [class.active]="i === 0"></li>
+        </ol>
+        <!-- Wrapper for carousel items -->
+        <div class="carousel-inner">
+          <div class="carousel-item" *ngFor="let chunk of coursChunks; let i = index" [class.active]="i === 0">
+            <div class="row">
+              <!-- Loop to display 4 courses per slide -->
+              <div class="col-sm-3" *ngFor="let cours of chunk">
+                <div class="thumb-wrapper" (click)="navigateToCourseDetails(cours.id); $event.stopPropagation()" style="cursor: pointer;">
+                  <div class="img-box">
+                    <img [src]="cours.fichier" class="img-fluid" alt="Image du cours">
+                  </div>
+                  <span style="font-size: 12px;color: blue;">{{ cours.module }}</span>
+                  <div class="thumb-content">
+                    <p style="font-size: 14px;">{{ cours.titre }}</p>
+                    <p style="font-size: 12px;">{{ cours.contenu }}</p>
+                    <div class="star-rating">
+                      <ul class="list-inline">
+                        <li class="list-inline-item">
+                          <!-- Étoiles ou évaluations ici -->
+                        </li>
+                      </ul>
+                    </div>
+                    <p class=""><i class="bi bi-reception-4"></i>&nbsp;<b>{{ cours.niveau }}</b></p>
+                    <div class="action-buttons">
+                      <button type="button" class="btn btn-primary" (click)="navigateToCourseDetails(cours.id)">
+                        <i class="bi bi-eye-fill"></i> Voir
+                      </button>&nbsp;
+                      <button type="button" class="btn btn-success" (click)="loadCourseDetails(cours.id)">
+                        <i class="bi bi-pencil-square"></i> Modifier
+                      </button>&nbsp;
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-  <br />
-
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8 course-table">
-          <!-- Id Column -->
-          <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-            <td mat-cell *matCellDef="let cours"> {{ cours.id }} </td>
-          </ng-container>
-
-          <!-- Titre Column -->
-          <ng-container matColumnDef="titre">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Cours </th>
-            <td mat-cell *matCellDef="let cours"> {{ cours.titre }} </td>
-          </ng-container>
-
-          <!-- Contenu Column -->
-          <ng-container matColumnDef="contenu">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
-            <td mat-cell *matCellDef="let cours"> {{ cours.contenu }} </td>
-          </ng-container>
-
-          <!-- Module Column -->
-          <ng-container matColumnDef="module">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Module </th>
-            <td mat-cell *matCellDef="let cours"> {{ cours.module }} </td>
-          </ng-container>
-
-          <!-- Prérequis Column -->
-          <ng-container matColumnDef="prerequis">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Prérequis </th>
-            <td mat-cell *matCellDef="let cours"> {{ cours.prerequis }} </td>
-          </ng-container>
-
-          <!-- Niveau Column -->
-          <ng-container matColumnDef="niveau">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Niveau </th>
-            <td mat-cell *matCellDef="let cours"> {{ cours.niveau }} </td>
-          </ng-container>
-
-          <!-- Actions Column -->
-          <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef> Actions </th>
-            <td mat-cell *matCellDef="let cours">
-              <button type="button" class="btn btn-primary" (click)="navigateToCourseDetails(cours.id)">
-                <i class="bi bi-eye-fill"></i>
-              </button>&nbsp;
-              <button type="button" class="btn btn-success" (click)="loadCourseDetails(cours.id)">
-                <i class="bi bi-pencil-square"></i>
-              </button>&nbsp;
-              <button type="button" class="btn btn-danger">
-                <i class="bi bi-trash3-fill"></i>
-              </button>
-            </td>
-          </ng-container>
-
-          <!-- Header and Row Definitions -->
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="navigateToCourseDetails(row.id)" style="cursor: pointer;"></tr>
-        </table>
-
+        <!-- Carousel controls -->
+        <a class="carousel-control-prev" style="opacity: 1; pointer-events: 1; z-index: 10;transition: opacity 0.3s ease;" href="#courseCarousel" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Précédent</span>
+        </a>
+        <a class="carousel-control-next" style="opacity: 1; pointer-events: 1; z-index: 10;" href="#courseCarousel" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only" >Suivant</span>
+        </a>
       </div>
     </div>
   </div>
 </div>
+
+
+
+
+
 
 
 
@@ -224,6 +216,12 @@
         
                                             
    <style>
+
+.carousel-control-prev,
+.carousel-control-next {
+  pointer-events: none;
+}
+
 /* Conteneur principal */
 #mainContentWithHeader {
   padding: 20px;

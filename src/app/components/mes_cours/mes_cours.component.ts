@@ -35,7 +35,8 @@ export class Mes_coursComponent implements OnInit {
     prerequis: '',
     title: '',
     mot_cle: '',
-    duree: ''
+    duree: '',
+    fichier: ''
   };
 
   @ViewChild(MatPaginator) paginator!: MatPaginator; 
@@ -94,7 +95,7 @@ export class Mes_coursComponent implements OnInit {
   }
 
   resetNewCours(): void {
-    this.newCours = { id: 0, titre: '', module: '', contenu: '', niveau: '', prerequis: '', title: '', mot_cle: '', duree: '' };
+    this.newCours = { id: 0, titre: '', module: '', contenu: '', niveau: '', prerequis: '',fichier:'', title: '', mot_cle: '', duree: '' };
   }
 
   // Méthode pour modifier un cours
