@@ -14,7 +14,7 @@ import { AjouterCoursDialogComponent } from './components/mes_cours/ajouter-cour
 import { CoursDetailsComponent } from './components/mes_cours/cours-details/cours-details.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UtilisateursComponent } from './components/utilisateurs/utilisateurs.component';
-
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -32,8 +32,8 @@ import { UtilisateursComponent } from './components/utilisateurs/utilisateurs.co
     FormsModule,
     MatCardModule,
     BrowserAnimationsModule,
-    UtilisateursComponent
-    // autres modules...
+    UtilisateursComponent,
+    QuillModule.forRoot(),
   ],
   bootstrap: [] // Ajout du bootstrap de votre AppComponent
 })

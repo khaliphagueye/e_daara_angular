@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
         debugger;
         this.http.post("http://localhost:8082/auth/login", this.loginObjet).subscribe((res: any) => {
             if (res) {
-            
+                localStorage.setItem('roles', res.roles);  // Enregistre le rôle dans localStorage
                 this.router.navigate(['/admin']); // Redirection vers le tableau de bord
             } else {
                 alert(res.message);

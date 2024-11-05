@@ -55,10 +55,10 @@ course = [
     contenu: '',
     niveau: '',
     prerequis: '',
-    title: '',
     mot_cle: '',
     duree: '',
-    fichier: ''
+    introduction: '',
+    image: ''
   };
 
   @ViewChild(MatSort) sort!: MatSort; 
@@ -80,6 +80,7 @@ course = [
     this.http.get<Cours[]>(url).subscribe({
       next: (data: Cours[]) => {
         this.cours = data;
+
         this.dataSource.data = this.cours;
         this.coursChunks = this.chunkArray(this.cours, 4); // Regroupement des cours par 4
       },
@@ -87,6 +88,7 @@ course = [
         console.log('Error:', err);
       }
     });
+    
   }
 
   // Fonction pour diviser le tableau de cours en lots
@@ -127,7 +129,7 @@ course = [
 
   // Réinitialise les champs du nouveau cours
   resetNewCours(): void {
-    this.newCours = { id: 0, titre: '', module: '', contenu: '', niveau: '', prerequis: '', title: '', mot_cle: '', duree: '', fichier: '' };
+    this.newCours = { id: 0, titre: '', module: '', contenu: '', niveau: '', prerequis: '', mot_cle: '', duree: '', image: '', introduction: '' };
   }
 
   // Méthode pour modifier un cours

@@ -1,0 +1,210 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div>
+        <form id="form">
+          <ul id="progressbar">
+            <li [class.active]="currentStep === 0" id="1"><strong>Leçon 1</strong></li>
+            <li [class.active]="currentStep === 1" id="2"><strong>Leçon 2</strong></li>
+            <li [class.active]="currentStep === 2" id="3"><strong>Leçon 3</strong></li>
+            <li [class.active]="currentStep === 3" id="4"><strong>Quizz</strong></li>
+            <li [class.active]="currentStep === 4" id="5"><strong>certificat</strong></li>
+          </ul>
+          <div class="progress">
+            <div class="progress-bar" [style.width]="progressWidth"></div>
+          </div>
+          <br>
+          <fieldset *ngIf="currentStep === 0">
+            <h2>Leçon 1</h2>
+            <!-- Afficher le contenu complet -->
+            <mat-card appearance="outlined" class="full-card">
+              <div *ngIf="course" class="course-details">
+                <mat-card class="course-card">
+                  <mat-card-header>
+                    <mat-card-title>
+                      <h2>{{ course.contenu1 }}</h2>
+                    </mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <div class="course-info">
+                      <!-- Afficher le contenu complet -->
+                      <div class="formatted-text" [innerHTML]="course.contenu2 | lineBreak"></div>
+                    </div>
+                  </mat-card-content>
+                </mat-card>
+              </div>
+            </mat-card>
+              <!-- Afficher le contenu complet -->
+            <input type="button" name="next-step" class="next-step" value="Next Step" (click)="nextStep()" />
+          </fieldset>
+          <fieldset *ngIf="currentStep === 1">
+            <h2>Leçon 2</h2>
+             <!-- Afficher le contenu complet -->
+             <mat-card appearance="outlined" class="full-card">
+              <div *ngIf="course" class="course-details">
+                <mat-card class="course-card">
+                  <mat-card-header>
+                    <mat-card-title>
+                      <h2>{{ course.contenu3 }}</h2>
+                    </mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <div class="course-info">
+                      <!-- Afficher le contenu complet -->
+                      <div class="formatted-text" [innerHTML]="course.contenu4 | lineBreak"></div>
+                    </div>
+                  </mat-card-content>
+                </mat-card>
+              </div>
+            </mat-card>
+              <!-- Afficher le contenu complet -->
+            <input type="button" name="next-step" class="next-step" value="Next Step" (click)="nextStep()" />
+            <input type="button" name="previous-step" class="previous-step" value="Previous Step" (click)="previousStep()" />
+          </fieldset>
+          <fieldset *ngIf="currentStep === 2">
+            <h2>Leçon 3</h2>
+             <!-- Afficher le contenu complet -->
+             <mat-card appearance="outlined" class="full-card">
+              <div *ngIf="course" class="course-details">
+                <mat-card class="course-card">
+                  <mat-card-header>
+                    <mat-card-title>
+                      <h2>{{ course.contenu5 }}</h2>
+                    </mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <div class="course-info">
+                      <!-- Afficher le contenu complet -->
+                      <div class="formatted-text" [innerHTML]="course.contenu6 | lineBreak"></div>
+                    </div>
+                  </mat-card-content>
+                </mat-card>
+              </div>
+            </mat-card>
+              <!-- Afficher le contenu complet -->
+            <input type="button" name="next-step" class="next-step" value="Next Step" (click)="nextStep()" />
+            <input type="button" name="previous-step" class="previous-step" value="Previous Step" (click)="previousStep()" />
+          </fieldset>
+          <fieldset *ngIf="currentStep === 3">
+            <h2>Quizz</h2>
+             <!-- Afficher le contenu complet -->
+             <mat-card appearance="outlined" class="full-card">
+              <div *ngIf="course" class="course-details">
+                <mat-card class="course-card">
+                  <mat-card-header>
+                    <mat-card-title>
+                      <h2>{{ course.titre }}</h2>
+                    </mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <div class="course-info">
+                      <!-- Afficher le contenu complet -->
+                      <div class="formatted-text" [innerHTML]="course.contenu8 | lineBreak"></div>
+                    </div>
+                  </mat-card-content>
+                </mat-card>
+              </div>
+            </mat-card>
+              <!-- Afficher le contenu complet -->
+            <input type="button" name="next-step" class="next-step" value="Next Step" (click)="nextStep()" />
+            <input type="button" name="previous-step" class="previous-step" value="Previous Step" (click)="previousStep()" />
+          </fieldset>
+          <fieldset *ngIf="currentStep === 4">
+            <div class="finish">
+              <h2 class="text text-center"><strong>Certificat</strong></h2>
+              <br><br><br><br>
+              <div class="row justify-content-center" id="certificat">
+                
+ 
+              <div class="certificat">
+                <h1>Certificat de Réussite</h1>
+                <p class="nom">Ceci certifie que</p>
+                <h2>{{ nomApprenant }}</h2>
+                <p class="description">a complété avec succès le cours</p>
+                <h3>{{ nomCours }}</h3>
+                <p class="date">Délivré le {{ date }}</p>
+                <div class="signature">
+                    <p>____________________</p>
+                    <p>{{ nomInstructeur }}</p>
+                    <p>{{ titreInstructeur }}</p>
+                </div>
+                
+                <div class="row justify-content-center" id="logo">
+                  <div class="col-md-6" id="image1" > 
+                    <img src="../../dist/assets/img/education.png" alt="E-Daara Logo"> <br><span class="brand-text fw-light">E-Daara</span>
+                  </div>
+                  <div class="col-md-6" id="image2"> 
+                    <img src="../../dist/assets/img/cachet.png" alt="E-Daara Logo" > <img src="../../dist/assets/img/signature.png" alt="E-Daara Logo" style="position:relative ; left:-80px;top:20px;" >
+                  </div>
+                </div>
+            </div>
+
+          </div>
+
+            <br>
+
+              <button (click)="downloadPDF()" type="button" class="btn btn-outline-info add-course-btn">télecharger mon certificat </button>
+            </div>
+            <input type="button" name="previous-step" class="previous-step" value="Previous Step" (click)="previousStep()" />
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  .certificat {
+    background-color: white;
+    border: 2px solid #4CAF50;
+    border-radius: 10px;
+    padding: 30px;
+    width: 600px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.certificat h1 {
+    color: #4CAF50;
+    font-size: 28px;
+}
+
+.nom {
+    font-size: 20px;
+    margin: 20px 0;
+}
+
+.certificat h2 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.description {
+    font-size: 18px;
+    margin: 20px 0;
+}
+
+.certificat h3 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.date {
+    margin: 30px 0;
+    font-style: italic;
+}
+
+.signature {
+    margin-top: 50px;
+}
+
+#logo img {
+    width: 100px; /* Ajuste la taille du logo selon tes besoins */
+    margin-top: 20px;
+    left: 40px; 
+}
+
+
+</style>
+

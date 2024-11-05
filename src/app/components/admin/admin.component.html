@@ -98,7 +98,7 @@
                          <li class="nav-item"> <a [routerLink]="['/admin/dashboard']" class="nav-link"> <i class="bi bi-house-door"></i>
                                 <p>Accueil</p>
                             </a> </li>
-                        <li class="nav-item"> <a [routerLink]="['/admin/mes_cours']" class="nav-link"> <i class="bi bi-book"></i>
+                        <li class="nav-item" > <a [routerLink]="['/admin/mes_cours']" class="nav-link"> <i class="bi bi-book"></i>
                                 <p>Gestion des cours</p>
                             </a> </li>
                         <li class="nav-item"> <a [routerLink]="['/admin/mes_documents']" class="nav-link"> <i class="bi bi-stickies"></i>
@@ -156,8 +156,15 @@
         <a href="https://adminlte.io" class="text-decoration-none"></a>&copy;
     </strong>
     <span class="small">Tous droits réservés.</span>
+    <p *ngIf="utilisateurConnecte">Utilisateur connecté : {{ utilisateurConnecte.nom }} {{ utilisateurConnecte.prenom }}</p>
+<p *ngIf="!utilisateurConnecte">Aucun utilisateur connecté.</p>
+<p *ngIf="utilisateurConnecte">Rôle de l'utilisateur connecté : {{ getRoleUtilisateur() }}</p>
+
    </div>
     <!--end::Copyright-->
+    
+    
+
      </footer>
 
         

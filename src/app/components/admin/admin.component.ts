@@ -2,20 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Utilisateur } from '../../models/utilisateur.model';
 
 //import { AuthService } from '../../services/auth.service'; // Assure-toi d'importer le service
 
 @Component({
   standalone: true,
   templateUrl: './admin.component.html', // Chemin relatif correct
-  imports: [RouterLink, RouterOutlet,FormsModule]
+  imports: [RouterLink, RouterOutlet,FormsModule,CommonModule]
 })
 export class AdminComponent implements OnInit {
 
-    ngOnInit() {
-        // Logique d'initialisation ici
-    }
+  
 
+  
     //constructor(private authService: AuthService) {}
 
   // Méthode pour se déconnecter
@@ -27,5 +28,16 @@ export class AdminComponent implements OnInit {
 
   onLogout() {
     this.authService.logout(); // Déconnexion de l'utilisateur
+  }
+
+  utilisateurConnecte: Utilisateur | null = null;
+
+
+  ngOnInit(): void {
+    this.utilisateurConnecte = this.authService.getUserInfo(); // Récupère l'utilisateur connecté
+  }
+
+  getRoleUtilisateur(): string {
+    return this.authService.getUserRole(); // Récupère le rôle de l'utilisateur
   }
 }

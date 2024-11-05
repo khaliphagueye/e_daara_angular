@@ -1,52 +1,29 @@
-<!-- cours-details.component.html --> 
 <mat-card appearance="outlined" class="small-card">
-    <div *ngIf="course" class="course-details">
-      <mat-card class="course-card">
-        <mat-card-header>
-          <mat-card-title>
-            <h2>Détails du Cours: {{ course.titre }}</h2>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <div class="course-info">
-            <p><strong>Module:</strong> {{ course.module }}</p>
-            <p><strong>Contenu:</strong> {{ course.contenu }}</p>
-            <p><strong>Niveau:</strong> {{ course.niveau }}</p>
-            <p><strong>Prérequis:</strong> {{ course.prerequis }}</p>
-            <p><strong>Durée:</strong> {{ course.duree }} heures</p>
-            <p><strong>Mots Clés:</strong> {{ course.mot_cle }}</p>
-          </div>
-        </mat-card-content>
-      </mat-card>
+  <div *ngIf="course" class="course-details">
+    <mat-card class="course-card">
+      <mat-card-header>
+        <mat-card-title>
+          <h2>Titre: {{ course.titre }}</h2>
+          <p class=""><i class="bi bi-reception-4"></i>&nbsp;<b>{{ course.niveau }}</b></p>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="course-info">
+          <p><strong>Prérequis:</strong> {{ course.prerequis }}</p>
+          <p><strong>Module:</strong> {{ course.module }}</p>
+
+          <!-- Afficher seulement une partie du contenu -->
+          <div class="formatted-text" [innerHTML]="truncatedContent | lineBreak"></div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <br>
+    <!-- Bouton pour commencer le cours -->
+    <div style="text-align:center">
+      <button (click)="commencerCours()" type="button" class="btn btn-outline-info add-course-btn">
+        Commencer le cours
+      </button>
     </div>
-  </mat-card>
-  
-  
-
-
-
-  <style>
-/* cours-details.component.scss */
-.small-card {
-  max-width: 1200px; /* Ajustez la largeur selon vos besoins */
-  top: 10px;
-  margin: 0 auto; /* Centrer la carte */
-  padding: 10px; /* Ajoutez un peu de padding pour l'aération */
-}
-
-.course-card {
-  font-size: 14px; /* Réduire la taille de la police pour le texte */
-}
-
-.course-info p {
-  margin: 5px 0; /* Réduire l'espacement entre les paragraphes */
-}
-
-h2 {
-  font-size: 18px; /* Ajustez la taille du titre si nécessaire */
-}
-
-
-  </style>
-  
-  
+  </div>
+  <br>
+</mat-card>

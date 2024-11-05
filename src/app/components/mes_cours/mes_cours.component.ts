@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';  
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { MatTableModule, MatTableDataSource } from '@angular/material/table'; 
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { Cours } from '../../models/cours.model';
 import { HttpClientModule } from '@angular/common/http';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatSort, MatSortModule } from '@angular/material/sort'; 
+import { MatSort, MatSortModule } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
@@ -24,7 +24,7 @@ import { FormsModule } from '@angular/forms';
 export class Mes_coursComponent implements OnInit {
   public cours: Cours[] = [];
   public dataSource: MatTableDataSource<Cours> = new MatTableDataSource<Cours>();
-  public displayedColumns: string[] = ['id', 'titre', 'module', 'contenu', 'niveau', 'prerequis', 'actions'];
+  public displayedColumns: string[] = ['id', 'titre', 'module', 'niveau', 'image', 'actions'];
 
   public newCours: Cours = {
     id: 0,
@@ -33,15 +33,34 @@ export class Mes_coursComponent implements OnInit {
     contenu: '',
     niveau: '',
     prerequis: '',
-    title: '',
     mot_cle: '',
     duree: '',
-    fichier: ''
+    introduction: '',
+    image: '',
+    contenu1: '',
+    contenu2: '',
+    contenu3: '',
+    contenu4: '',
+    contenu5: '',
+    contenu6: '',
+    contenu7: '',
+    contenu8: '',
+    contenu9: '',
+    contenu10: '',
+    contenu11: '',
+    contenu12: '',
+    contenu13: '',
+    contenu14: '',
+    contenu15: '',
+    contenu16: ''
   };
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator; 
-  @ViewChild(MatSort) sort!: MatSort; 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   selectedCourse: Cours | null = null;
+  selectedFile: File | null = null;
+  imgURL: any; // Propriété pour afficher l'image sélectionnée
+  private baseUrl = 'http://localhost:8082/cours';
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -50,24 +69,24 @@ export class Mes_coursComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator; 
-    this.dataSource.sort = this.sort; 
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
+  // Charger tous les cours
   loadCours(): void {
-    const url = "http://localhost:8082/cours";
-    this.http.get<Cours[]>(url).subscribe({
+    this.http.get<Cours[]>(this.baseUrl).subscribe({
       next: (data: Cours[]) => {
         this.cours = data;
         this.dataSource.data = this.cours;
       },
       error: (err: HttpErrorResponse) => {
-        console.log('Error:', err);
+        console.log('Erreur lors du chargement des cours:', err);
       }
     });
   }
 
-  // Méthode pour charger les détails du cours
+  // Charger les détails d'un cours spécifique
   loadCourseDetails(courseId: number): void {
     const foundCourse = this.cours.find(course => course.id === courseId);
     if (foundCourse) {
@@ -78,31 +97,81 @@ export class Mes_coursComponent implements OnInit {
     }
   }
 
-  // Méthode pour ajouter un cours
-  onSubmit(): void {
-    const url = 'http://localhost:8082/cours/';
-    this.http.post<Cours>(url, this.newCours).subscribe({
-      next: (data: Cours) => {
-        console.log('Cours ajouté avec succès:', data);
-        this.dataSource.data.push(data);
-        this.dataSource._updateChangeSubscription();
-        this.resetNewCours();
-      },
-      error: (err: HttpErrorResponse) => {
-        console.error('Error lors de l\'ajout du cours:', err);
+   // Sélectionner un fichier image pour le cours
+   onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+
+      const reader = new FileReader();
+      reader.readAsDataURL(this.selectedFile); 
+      reader.onload = () => { 
+        this.imgURL = reader.result; 
       }
+    }
+  }
+
+  // Ajouter un cours avec une image
+  onSubmit(): void {
+    if (!this.selectedFile) {
+      console.error("Aucun fichier sélectionné !");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", this.selectedFile);
+    formData.append("cours", JSON.stringify(this.newCours));
+
+    const url = 'http://localhost:8082/cours/upload';
+    this.http.post(url, formData, { responseType: 'text' }).subscribe({
+        next: (response) => {
+            console.log("Réponse du serveur:", response);
+            this.loadCours();
+            this.resetNewCours();
+            this.selectedFile = null;
+        },
+        error: (err: HttpErrorResponse) => {
+            console.error("Erreur lors de l'ajout du cours avec image :", err);
+        }
     });
-  }
+}
 
+  // Réinitialiser le formulaire de nouveau cours
   resetNewCours(): void {
-    this.newCours = { id: 0, titre: '', module: '', contenu: '', niveau: '', prerequis: '',fichier:'', title: '', mot_cle: '', duree: '' };
+    this.newCours = {
+      id: 0,
+      titre: '',
+      module: '',
+      contenu: '',
+      niveau: '',
+      prerequis: '',
+      mot_cle: '',
+      duree: '',
+      introduction: '',
+      image: '',
+      contenu1: '',
+      contenu2: '',
+      contenu3: '',
+      contenu4: '',
+      contenu5: '',
+      contenu6: '',
+      contenu7: '',
+      contenu8: '',
+      contenu9: '',
+      contenu10: '',
+      contenu11: '',
+      contenu12: '',
+      contenu13: '',
+      contenu14: '',
+      contenu15: '',
+      contenu16: ''
+    };
   }
 
-  // Méthode pour modifier un cours
-  public updateCourse(): void {
+  // Mettre à jour un cours
+  updateCourse(): void {
     if (this.selectedCourse && this.selectedCourse.id) {
-      const url = `http://localhost:8082/cours/${this.selectedCourse.id}`;
-      this.http.put<Cours>(url, this.selectedCourse).subscribe({
+      this.http.put<Cours>(`${this.baseUrl}/${this.selectedCourse.id}`, this.selectedCourse).subscribe({
         next: () => {
           console.log('Cours modifié avec succès');
           this.loadCours();
@@ -117,10 +186,9 @@ export class Mes_coursComponent implements OnInit {
     }
   }
 
-  // Méthode pour supprimer un cours
+  // Supprimer un cours
   deleteCourse(coursId: number): void {
-    const url = `http://localhost:8082/cours/${coursId}`;
-    this.http.delete(url).subscribe({
+    this.http.delete(`${this.baseUrl}/${coursId}`).subscribe({
       next: () => {
         this.cours = this.cours.filter(course => course.id !== coursId);
         this.dataSource.data = this.cours;
@@ -133,15 +201,16 @@ export class Mes_coursComponent implements OnInit {
     });
   }
 
-  // Ajout de la méthode pour naviguer vers les détails du cours
+  // Naviguer vers les détails du cours
   navigateToCourseDetails(courseId: number): void {
     const foundCourse = this.cours.find(course => course.id === courseId);
     if (foundCourse) {
-        this.router.navigateByUrl(`/admin/cours-details/${courseId}`, { state: { course: foundCourse } });
+      this.router.navigateByUrl(`/admin/cours-details/${courseId}`, { state: { course: foundCourse } });
     }
-}
+  }
 
-  public clearCourseDetails(): void {
+  // Effacer les détails du cours sélectionné
+  clearCourseDetails(): void {
     this.selectedCourse = null;
   }
 }
