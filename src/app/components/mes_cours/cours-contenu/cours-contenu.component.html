@@ -11,6 +11,9 @@
         <div class="course-info">
           <p><strong>Prérequis:</strong> {{ course.prerequis }}</p>
           <p><strong>Module:</strong> {{ course.module }}</p>
+          <p><strong>Module:</strong> {{ course.module }}</p>
+            <img [src]="course.image" alt="{{ course.titre }}" style="width: 100px; height: auto;" />
+          
 
           <!-- Afficher seulement une partie du contenu -->
           <div class="formatted-text" [innerHTML]="truncatedContent | lineBreak"></div>

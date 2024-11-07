@@ -10,11 +10,23 @@ interface Documents {
 
 @Component({
   standalone: true,
-  templateUrl: './mon_profil.component.html' // Chemin relatif correct
+  templateUrl: './mon_profil.component.html', // Chemin relatif correct
+  imports: [
+    CommonModule
+  ]
 })
 export class Mon_profilComponent implements OnInit {
+  utilisateur: any;
 
-    ngOnInit() {
-        // Logique d'initialisation ici
+  ngOnInit(): void {
+    // Récupérer les informations de l'utilisateur depuis localStorage
+    const utilisateurData = localStorage.getItem('utilisateur');
+    if (utilisateurData) {
+      this.utilisateur = JSON.parse(utilisateurData);
+    } else {
+      // Si aucune information n'est trouvée, rediriger vers la page de connexion
+      alert('Utilisateur non connecté');
     }
+  }
 }
+

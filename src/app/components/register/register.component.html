@@ -1,0 +1,109 @@
+<div class="register-page bg-body-secondary">
+    <div class="register-box">
+        <div class="register-logo"> <a href="/dist/pages/index2.html"><b>E -</b>DAARA</a> </div> <!-- /.register-logo -->
+        <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+        <div class="card">
+            <div class="card-body register-card-body">
+                <p class="register-box-msg">S'inscrire</p>
+                <form action="/dist/pages/index3.html" (ngSubmit)="onSubmit()" #registerForm="ngForm" method="post">
+                    
+                    <div class="input-group mb-3"> <input type="text" id="prenom" name="prenom" [(ngModel)]="newUtilisateur.prenom" class="form-control" placeholder="Prenom" required>
+                        <div class="input-group-text"> <span class="bi bi-person"></span> </div>
+                    </div>
+                    <div class="input-group mb-3"> <input type="text" id="nom" name="nom" [(ngModel)]="newUtilisateur.nom" class="form-control" placeholder="Nom" required>
+                        <div class="input-group-text"> <span class="bi bi-person"></span> </div>
+                    </div>
+                    <div class="input-group mb-3"> <input type="email" id="email" name="email" [(ngModel)]="newUtilisateur.email" class="form-control" placeholder="Email" required>
+                        <div class="input-group-text"> <span class="bi bi-envelope"></span> </div>
+                    </div>
+                    <div class="input-group mb-3"> <input type="password" id="mdp" name="mdp" [(ngModel)]="newUtilisateur.mdp" class="form-control" placeholder="Mot de passe" required>
+                        <div class="input-group-text"> <span class="bi bi-lock-fill"></span> </div>
+                    </div> 
+                    <div class="input-group mb-3" hidden>
+                        <select id="typeUtilisateur" [(ngModel)]="newUtilisateur.typeUtilisateur" name="typeUtilisateur" class="form-control" required>
+                            <option value="" disabled selected>Type d'utilisateur</option>
+                            <option value="ADMIN">Admin</option>
+                            <option value="FORMATEUR">FORMATEUR</option>
+                            <option value="APPRENANT">APPRENANT</option>
+                        </select>
+                        <div class="input-group-text">
+                            <span class="bi bi-person-badge"></span>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3" hidden> <input type="text" id="roles" name="roles" [(ngModel)]="newUtilisateur.roles[0]" class="form-control" placeholder="Roles" required>
+                        <div class="input-group-text"> <span class="bi bi-envelope"></span> </div>
+                    </div>
+                    <div class="input-group mb-3"> <input type="text" id="biographie" name="biographie" [(ngModel)]="newUtilisateur.biographie" class="form-control" placeholder="Biographie">
+                        <div class="input-group-text"> <span class="bi bi-envelope"></span> </div>
+                    </div>
+                    <div class="input-group mb-3"> <input type="text" id="profession" name="profession" [(ngModel)]="newUtilisateur.profession" class="form-control" placeholder="Profession">
+                        <div class="input-group-text"> <span class="bi bi-envelope"></span> </div>
+                    </div>
+                
+                    <!--begin::Row-->
+                    <div class="row">
+                        <div class="col-8">
+                            <!--div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"> <label class="form-check-label" for="flexCheckDefault">
+                                    I agree to the <a href="#">terms</a> </label> </div-->
+                        </div> <!-- /.col -->
+                        <div class="col-4">
+                            <div class="d-grid gap-2"> <button type="submit" class="btn btn-primary">S'inscrire</button> </div>
+                        </div> <!-- /.col -->
+                    </div> <!--end::Row-->
+                </form>
+                <div class="social-auth-links text-center mb-3 d-grid gap-2">
+                    <p>- OU -</p> <a href="#" class="btn btn-primary"> <i class="bi bi-facebook me-2"></i>Inscrivez-vous avec Facebook
+                    </a> <a href="#" class="btn btn-danger"> <i class="bi bi-google me-2"></i> Inscrivez-vous avec Google
+                    </a>
+                </div> <!-- /.social-auth-links -->
+                <p class="mb-0"> <a [routerLink]="['/login']" class="text-center">
+                        J'ai déjà un compte !
+                    </a> </p>
+            </div> <!-- /.register-card-body -->
+        </div>
+    </div> <!-- /.register-box --> <!--begin::Third Party Plugin(OverlayScrollbars)-->
+    <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/browser/overlayscrollbars.browser.es6.min.js" integrity="sha256-H2VM7BKda+v2Z4+DRy69uknwxjyDRhszjXFhsL4gD3w=" crossorigin="anonymous"></script> <!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Required Plugin(popperjs for Bootstrap 5)-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha256-whL0tQWoY1Ku1iskqPFvmZ+CHsvmRWx/PIoEvIeWh4I=" crossorigin="anonymous"></script> <!--end::Required Plugin(popperjs for Bootstrap 5)--><!--begin::Required Plugin(Bootstrap 5)-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha256-YMa+wAM6QkVyz999odX7lPRxkoYAan8suedu4k2Zur8=" crossorigin="anonymous"></script> <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
+    <script src="../../../dist/js/adminlte.js"></script> <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
+    <script>
+        const SELECTOR_SIDEBAR_WRAPPER = ".sidebar-wrapper";
+        const Default = {
+            scrollbarTheme: "os-theme-light",
+            scrollbarAutoHide: "leave",
+            scrollbarClickScroll: true,
+        };
+        document.addEventListener("DOMContentLoaded", function() {
+            const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
+            if (
+                sidebarWrapper &&
+                typeof OverlayScrollbarsGlobal?.OverlayScrollbars !== "undefined"
+            ) {
+                OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
+                    scrollbars: {
+                        theme: Default.scrollbarTheme,
+                        autoHide: Default.scrollbarAutoHide,
+                        clickScroll: Default.scrollbarClickScroll,
+                    },
+                });
+            }
+        });
+    </script> <!--end::OverlayScrollbars Configure--> <!--end::Script-->
+</div><!--end::Body-->
+
+<style>
+.error-message {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.success-message {
+    color: green;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+
+</style>

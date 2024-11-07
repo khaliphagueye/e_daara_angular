@@ -11,6 +11,7 @@ import { UtilisateursComponent } from './components/utilisateurs/utilisateurs.co
 import { AdminComponent } from './components/admin/admin.component';
 import { CoursContenuComponent } from './components/mes_cours/cours-contenu/cours-contenu.component';
 import { LeconCoursContenuComponent } from './components/mes_cours/lecon-cours-contenu/lecon-cours-contenu.component';
+import { RegisterComponent } from './components/register/register.component';
 
 // Import du guard
 //import { AuthGuard } from './guards/auth.guard';
@@ -23,6 +24,10 @@ export const routes: Routes = [
     { 
         path: 'login',
         component: LoginComponent
+    },
+    { 
+        path: 'register',
+        component: RegisterComponent
     },
     { 
         path: 'admin',

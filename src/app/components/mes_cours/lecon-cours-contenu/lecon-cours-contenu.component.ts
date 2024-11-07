@@ -29,14 +29,14 @@ declare var $: any; // Pour déclarer jQuery si vous l'utilisez
 
 export class LeconCoursContenuComponent implements OnInit {
 
-  nomApprenant: string = 'Samba DIAO'; // Remplace par une variable dynamique
+  
   nomCours: string = 'Introduction à Angular'; // Remplace par une variable dynamique
   date: string = new Date().toLocaleDateString(); // Date actuelle
-  nomInstructeur: string = 'Khalifa'; // Remplace par une variable dynamique
-  titreInstructeur: string = 'Formateur'; // Remplace par une variable dynamique
+  attestation: string = 'En foi de quoi la présente attestation est délévrée'; // Remplace par une variable dynamique
+  programme_e_daara: string = 'Le programme E-Daara'; // Remplace par une variable dynamique
   logoPath: string = 'assets/logo.png'; // Chemin vers le logo
 
-
+  utilisateur: any;
 
 downloadPDF() {
     const element = document.getElementById('certificat');
@@ -99,5 +99,17 @@ downloadPDF() {
     if (!this.course) {
       console.error('Aucun détail de cours trouvé');
     }
+
+
+
+ // Récupérer les informations de l'utilisateur depuis localStorage
+ const utilisateurData = localStorage.getItem('utilisateur');
+ if (utilisateurData) {
+   this.utilisateur = JSON.parse(utilisateurData);
+ } else {
+   // Si aucune information n'est trouvée, rediriger vers la page de connexion
+   alert('Utilisateur non connecté');
+ }
+
   }
 }

@@ -24,14 +24,14 @@
             </div>
           </div>
       
-          <div class="row">
+          <div class="row" *ngIf="utilisateur">
             <div class="col-lg-4">
               <div class="card mb-4">
                 <div class="card-body text-center">
                   <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
                     class="rounded-circle img-fluid" style="width: 150px;">
-                  <h5 class="my-3">Samba DIAO</h5>
-                  <p class="text-muted mb-1">Profession : Développeur</p>
+                  <h5 class="my-3"> {{ utilisateur.prenom }} {{ utilisateur.nom }}</h5>
+                  <p class="text-muted mb-1">Profession : {{ utilisateur.profession }}</p>
                   <p class="text-muted mb-4">adresse : Dakar</p>
                   <!--div class="d-flex justify-content-center mb-2">
                     <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary">Follow</button>
@@ -54,7 +54,7 @@
                       <p class="mb-0">Prénom</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">Samba</p>
+                      <p class="text-muted mb-0">{{ utilisateur.prenom }}</p>
                     </div>
                   </div>
                   <hr>
@@ -63,7 +63,7 @@
                       <p class="mb-0">Nom</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">DIAO</p>
+                      <p class="text-muted mb-0">{{ utilisateur.nom }}</p>
                     </div>
                   </div>
                   <hr>
@@ -72,7 +72,7 @@
                       <p class="mb-0">Email</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">sambadiaogmail.com</p>
+                      <p class="text-muted mb-0">{{ utilisateur.email }}</p>
                     </div>
                   </div>
                   <hr>
@@ -81,7 +81,7 @@
                       <p class="mb-0">Profession</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">Développeur</p>
+                      <p class="text-muted mb-0">{{ utilisateur.profession }}</p>
                     </div>
                   </div>
                   <hr>
@@ -90,9 +90,12 @@
                       <p class="mb-0">Profil</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">Formateur</p>
+                      <p class="text-muted mb-0">{{ utilisateur.roles }}</p>
                     </div>
                   </div>
+
+                  <!-- mon-profil.component.html -->
+
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">

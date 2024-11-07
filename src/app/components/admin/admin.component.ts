@@ -30,14 +30,16 @@ export class AdminComponent implements OnInit {
     this.authService.logout(); // Déconnexion de l'utilisateur
   }
 
-  utilisateurConnecte: Utilisateur | null = null;
-
+  utilisateur: any;
 
   ngOnInit(): void {
-    this.utilisateurConnecte = this.authService.getUserInfo(); // Récupère l'utilisateur connecté
-  }
-
-  getRoleUtilisateur(): string {
-    return this.authService.getUserRole(); // Récupère le rôle de l'utilisateur
+    // Récupérer les informations de l'utilisateur depuis localStorage
+    const utilisateurData = localStorage.getItem('utilisateur');
+    if (utilisateurData) {
+      this.utilisateur = JSON.parse(utilisateurData);
+    } else {
+      // Si aucune information n'est trouvée, rediriger vers la page de connexion
+      alert('Utilisateur non connecté');
+    }
   }
 }

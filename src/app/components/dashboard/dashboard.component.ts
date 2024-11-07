@@ -65,9 +65,19 @@ course = [
   selectedCourse: Cours | null = null;
 
   constructor(private http: HttpClient, private router: Router) {}
-
+  utilisateur: any;
   ngOnInit(): void {
     this.loadCours();
+
+    // Récupérer les informations de l'utilisateur depuis localStorage
+    const utilisateurData = localStorage.getItem('utilisateur');
+    if (utilisateurData) {
+      this.utilisateur = JSON.parse(utilisateurData);
+    } else {
+      // Si aucune information n'est trouvée, rediriger vers la page de connexion
+      alert('Utilisateur non connecté');
+    }
+    
   }
 
   ngAfterViewInit(): void {
@@ -163,5 +173,10 @@ course = [
   public clearCourseDetails(): void {
     this.selectedCourse = null;
   }
+
+
+
+  
+ 
 
 }

@@ -6,7 +6,7 @@
   <div id="dashboard-courses-above-recommended-courses">
     <div id="disclaimers-target-container"></div>
 
-    <section id="courses-taken">
+    <section id="courses-taken" *ngIf="utilisateur.roles == 'APPRENANT'">
       <h1 class="secondTitle">Cours suivis</h1>
       <table class="table table-bordered">
         <thead>
@@ -32,8 +32,8 @@
         <div class="container-xl">
           <div class="row">
             <div class="col-md-12">
-              <h2 class="section-title">La Gestion des Cours</h2>
-              <hr class="hr hr-blurry" />
+              <h1 class="secondTitle">Cours recommandés</h1>
+              <hr class="hr hr-blurry"/>
               <div id="courseCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
                 <!-- Carousel indicators -->
                 <ol class="carousel-indicators">
@@ -65,14 +65,14 @@
                               </ul>
                             </div>
                             <p class=""><i class="bi bi-reception-4"></i>&nbsp;<b>{{ cours.niveau }}</b></p>
-                            <div class="action-buttons">
+                            <!--div class="action-buttons">
                               <button type="button" class="btn btn-success" (click)="loadCourseDetails(cours.id); $event.stopPropagation()">
                                 <i class="bi bi-pencil-square"></i> Modifier
                               </button>&nbsp;
                               <button type="button" class="btn btn-primary" (click)="navigateToCourseDetails(cours.id); $event.stopPropagation()">
                                 <i class="bi bi-eye-fill"></i> Voir
                               </button>
-                            </div>
+                            </div-->
                           </div>
                         </div>
                       </div>
@@ -93,73 +93,7 @@
             </div>
           </div>
         </div>
-        
-
-
-
-
-
-
-
-
-<!--div>fi</div-->
-        <div class="container-xl">
-          <div class="row">
-            <div class="col-md-12">
-              <h1 class="secondTitle">Cours recommandés</h1>
-              <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
-                <!-- Carousel indicators -->
-                <ol class="carousel-indicators">
-                  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                  <li data-target="#myCarousel" data-slide-to="1"></li>
-                  <li data-target="#myCarousel" data-slide-to="2"></li>
-                </ol>
-                <!-- Wrapper for carousel items -->
-                <div class="carousel-inner">
-                  <div class="item carousel-item active">
-                    <div class="row">
-                      <div class="col-sm-3" *ngFor="let course of course">
-                        <div class="thumb-wrapper">
-                          <span class="wish-icon" >
-                           
-                          </span>
-                          <div class="img-box">
-                            <img [src]="course.fichier" class="img-fluid" alt="">
-                          </div>
-                          <span style="font-size: 12px;color: blue;">{{ course.module }}</span>
-                          <div class="thumb-content">
-                            <p style="font-size: 12px;">{{ course.titre }}</p>
-                            <div class="star-rating">
-                              <ul class="list-inline">
-                                <li class="list-inline-item">
-                                 
-                                </li>
-                              </ul>
-                            </div>
-                            <p class=""><i class="bi bi-reception-4"></i>&nbsp;
-                              <b>{{ course.niveau }}</b>
-                            </p>
-                           
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Carousel controls -->
-                <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-                  <i class="fa fa-angle-left"></i>
-                </a>
-                <a class="carousel-control-next" href="#myCarousel" data-slide="next">
-                  <i class="fa fa-angle-right"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
+      
         <br>
 
 
@@ -167,51 +101,61 @@
           <div class="row">
             <div class="col-md-12">
               <h1 class="secondTitle">Derniers cours publiés</h1>
-              <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+              <hr class="hr hr-blurry"/>
+              <div id="courseCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
                 <!-- Carousel indicators -->
                 <ol class="carousel-indicators">
-                  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                  <li data-target="#myCarousel" data-slide-to="1"></li>
-                  <li data-target="#myCarousel" data-slide-to="2"></li>
+                  <li *ngFor="let chunk of coursChunks; let i = index" data-target="#courseCarousel" [attr.data-slide-to]="i" [class.active]="i === 0"></li>
                 </ol>
                 <!-- Wrapper for carousel items -->
                 <div class="carousel-inner">
-                  <div class="item carousel-item active">
+                  <div class="carousel-item" *ngFor="let chunk of coursChunks; let i = index" [class.active]="i === 0">
                     <div class="row">
-                      <div class="col-sm-3" *ngFor="let course of course">
-                        <div class="thumb-wrapper">
-                          <span class="wish-icon" >
-                           
-                          </span>
+                      <!-- Loop to display 4 courses per slide -->
+                      <div class="col-sm-3" *ngFor="let cours of chunk">
+                        <div class="thumb-wrapper" (click)="navigateToCourseDetails(cours.id); $event.stopPropagation()" style="cursor: pointer;">
                           <div class="img-box">
-                            <img [src]="course.fichier" class="img-fluid" alt="">
+                            <td mat-cell *matCellDef="let course">
+                              <img [src]="course.image" alt="{{ course.titre }}" style="width: 100px; height: auto;" />
+                            </td>
+                            <img [src]="'http://localhost:8082/cours/uploads/' + cours.image" 
+                            class="img-fluid" 
+                            alt="Image du cours">
                           </div>
-                          <span style="font-size: 12px;color: blue;">{{ course.module }}</span>
+                          <span style="font-size: 12px; color: blue;">{{ cours.module }}</span>
                           <div class="thumb-content">
-                            <p style="font-size: 12px;">{{ course.titre }}</p>
+                            <p style="font-size: 14px;">{{ cours.titre }}</p>
                             <div class="star-rating">
                               <ul class="list-inline">
                                 <li class="list-inline-item">
-                                 
+                                  <!-- Étoiles ou évaluations ici -->
                                 </li>
                               </ul>
                             </div>
-                            <p class=""><i class="bi bi-reception-4"></i>&nbsp;
-                              <b>{{ course.niveau }}</b>
-                            </p>
-                           
+                            <p class=""><i class="bi bi-reception-4"></i>&nbsp;<b>{{ cours.niveau }}</b></p>
+                            <!--div class="action-buttons">
+                              <button type="button" class="btn btn-success" (click)="loadCourseDetails(cours.id); $event.stopPropagation()">
+                                <i class="bi bi-pencil-square"></i> Modifier
+                              </button>&nbsp;
+                              <button type="button" class="btn btn-primary" (click)="navigateToCourseDetails(cours.id); $event.stopPropagation()">
+                                <i class="bi bi-eye-fill"></i> Voir
+                              </button>
+                            </div-->
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
+        
                 <!-- Carousel controls -->
-                <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-                  <i class="fa fa-angle-left"></i>
+                <a class="carousel-control-prev" style="opacity: 1; pointer-events: 1; z-index: 10; transition: opacity 0.3s ease;" href="#courseCarousel" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Précédent</span>
                 </a>
-                <a class="carousel-control-next" href="#myCarousel" data-slide="next">
-                  <i class="fa fa-angle-right"></i>
+                <a class="carousel-control-next" style="opacity: 1; pointer-events: 1; z-index: 10;" href="#courseCarousel" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Suivant</span>
                 </a>
               </div>
             </div>
@@ -337,6 +281,22 @@
 .button:hover {
   background-color: #0056b3; /* Couleur au survol */
 }
+
+
+
+
+
+
+.secondTitle {
+    margin-top: 10px; /* Diminue la marge au-dessus du titre */
+    margin-bottom: -10px; /* Diminue la marge en dessous du titre */
+}
+
+.hr-blurry {
+    margin-top: -10px; /* Diminue l'espace au-dessus de la ligne */
+    margin-bottom: 50px; /* Diminue l'espace en dessous de la ligne */
+}
+
 
 
 

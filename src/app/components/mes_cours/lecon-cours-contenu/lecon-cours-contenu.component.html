@@ -116,17 +116,17 @@
               <div class="row justify-content-center" id="certificat">
                 
  
-              <div class="certificat">
+              <div class="certificat" *ngIf="utilisateur">
                 <h1>Certificat de Réussite</h1>
                 <p class="nom">Ceci certifie que</p>
-                <h2>{{ nomApprenant }}</h2>
+                <h2>{{ utilisateur.prenom }} {{ utilisateur.nom }}</h2>
                 <p class="description">a complété avec succès le cours</p>
-                <h3>{{ nomCours }}</h3>
+                <h3>{{ course.titre }}</h3>
                 <p class="date">Délivré le {{ date }}</p>
                 <div class="signature">
                     <p>____________________</p>
-                    <p>{{ nomInstructeur }}</p>
-                    <p>{{ titreInstructeur }}</p>
+                    <p>{{ attestation }}</p>
+                    <i><b><p>{{ programme_e_daara }}</p></b></i>  
                 </div>
                 
                 <div class="row justify-content-center" id="logo">
@@ -157,7 +157,7 @@
 <style>
   .certificat {
     background-color: white;
-    border: 2px solid #4CAF50;
+    border: 20px solid #4CAF50;
     border-radius: 10px;
     padding: 30px;
     width: 600px;

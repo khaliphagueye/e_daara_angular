@@ -6,6 +6,7 @@
                     <li class="nav-item"> <a class="nav-link" data-lte-toggle="sidebar"  role="button"> <i class="bi bi-list"></i> </a> </li>
                     <!--li class="nav-item d-none d-md-block"> <a href="#" class="nav-link">Home</a> </li>
                     <li class="nav-item d-none d-md-block"> <a href="#" class="nav-link">Contact</a> </li-->
+                    <li class="nav-item d-none d-md-block" *ngIf="utilisateur"> <a  class="nav-link"><i>Vous êtes connecté en tant que <b>{{ utilisateur.roles }}</b></i></a> </li>
                 </ul> <!--end::Start Navbar Links--> <!--begin::End Navbar Links-->
                 <ul class="navbar-nav ms-auto"> <!--begin::Navbar Search-->
                     <li class="nav-item"> <a class="nav-link" data-widget="navbar-search" href="#" role="button"> <i class="bi bi-search"></i> </a> </li> <!--end::Navbar Search--> <!--begin::Messages Dropdown Menu-->
@@ -69,7 +70,7 @@
                         </div>
                     </li> <!--end::Notifications Dropdown Menu--> <!--begin::Fullscreen Toggle-->
                     <li class="nav-item"> <a class="nav-link" href="#" data-lte-toggle="fullscreen"> <i data-lte-icon="maximize" class="bi bi-arrows-fullscreen"></i> <i data-lte-icon="minimize" class="bi bi-fullscreen-exit" style="display: none;"></i> </a> </li> <!--end::Fullscreen Toggle--> <!--begin::User Menu Dropdown-->
-                    <li class="nav-item dropdown user-menu"> <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> <img src="../../dist/assets/img/profil.jpeg" class="user-image rounded-circle shadow" alt="User Image"> <span class="d-none d-md-inline">Samba DIAO</span> </a>
+                    <li class="nav-item dropdown user-menu"> <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> <img src="../../dist/assets/img/profil.jpeg" class="user-image rounded-circle shadow" alt="User Image"> <span class="d-none d-md-inline" *ngIf="utilisateur"> {{ utilisateur.prenom }} {{ utilisateur.nom }}</span> </a>
                         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end"> <!--begin::User Image-->
                             <li class="user-header text-bg-primary"> <img src="../../dist/assets/img/user2-160x160.jpg" class="rounded-circle shadow" alt="User Image">
                                 <p>
@@ -98,7 +99,7 @@
                          <li class="nav-item"> <a [routerLink]="['/admin/dashboard']" class="nav-link"> <i class="bi bi-house-door"></i>
                                 <p>Accueil</p>
                             </a> </li>
-                        <li class="nav-item" > <a [routerLink]="['/admin/mes_cours']" class="nav-link"> <i class="bi bi-book"></i>
+                        <li class="nav-item" *ngIf="utilisateur.roles == 'FORMATEUR' || utilisateur.roles == 'ADMIN'"> <a [routerLink]="['/admin/mes_cours']" class="nav-link"> <i class="bi bi-book"></i>
                                 <p>Gestion des cours</p>
                             </a> </li>
                         <li class="nav-item"> <a [routerLink]="['/admin/mes_documents']" class="nav-link"> <i class="bi bi-stickies"></i>
@@ -118,7 +119,7 @@
                                 <p>Mon profil</p>
                             </a> 
                         </li>
-                        <li class="nav-item"> <a [routerLink]="['/admin/utilisateurs']" class="nav-link"> <i class="bi bi-person-square"></i>
+                        <li class="nav-item" *ngIf="utilisateur.roles == 'ADMIN'"> <a [routerLink]="['/admin/utilisateurs']" class="nav-link"> <i class="bi bi-person-square"></i>
                                 <p>Gestion des utilisateurs</p>
                             </a> 
                         </li>
@@ -156,10 +157,7 @@
         <a href="https://adminlte.io" class="text-decoration-none"></a>&copy;
     </strong>
     <span class="small">Tous droits réservés.</span>
-    <p *ngIf="utilisateurConnecte">Utilisateur connecté : {{ utilisateurConnecte.nom }} {{ utilisateurConnecte.prenom }}</p>
-<p *ngIf="!utilisateurConnecte">Aucun utilisateur connecté.</p>
-<p *ngIf="utilisateurConnecte">Rôle de l'utilisateur connecté : {{ getRoleUtilisateur() }}</p>
-
+    
    </div>
     <!--end::Copyright-->
     

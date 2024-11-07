@@ -29,7 +29,7 @@ export class UtilisateursComponent implements OnInit {
   public dataSource: MatTableDataSource<Utilisateur> = new MatTableDataSource<Utilisateur>();
   
   // Colonnes à afficher dans la table Material
-  public displayedColumns: string[] = ['id', 'nom', 'prenom', 'email', 'typeUtilisateur', 'roles', 'profession', 'actions'];
+  public displayedColumns: string[] = ['id', 'nom', 'prenom', 'email', 'roles', 'profession', 'actions'];
 
   // Objet pour stocker les informations d'un nouvel utilisateur à ajouter
   public newUtilisateur: Utilisateur = {
