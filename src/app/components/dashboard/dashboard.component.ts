@@ -19,11 +19,11 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
  // Données de test pour les cours
  courses = [
-  { title: 'Introduction à Angular', dateInscription: '2023-01-15', progression: 75, certificat: 'https://example.com/angular' },
-  { title: 'Apprendre TypeScript', dateInscription: '2023-02-10', progression: 50, certificat: 'https://example.com/typescript' },
-  { title: 'Créez votre site web avec html et css', dateInscription: '2023-03-05', progression: 90, certificat: 'https://example.com/html-css' },
-  { title: 'JavaScript pour les débutants', dateInscription: '2023-04-20', progression: 30, certificat: 'https://example.com/javascript' },
-  { title: 'Création d’API REST avec Node.js', dateInscription: '2023-05-18', progression: 65, certificat: 'https://example.com/nodejs' },
+  { title: 'Introduction à Angular', dateInscription: '2024-01-15', progression: 75, certificat: 'https://example.com/angular' },
+  { title: 'Apprendre TypeScript', dateInscription: '2024-02-10', progression: 50, certificat: 'https://example.com/typescript' },
+  { title: 'Créez votre site web avec html et css', dateInscription: '2024-03-05', progression: 90, certificat: 'https://example.com/html-css' },
+  { title: 'JavaScript pour les débutants', dateInscription: '2024-04-20', progression: 30, certificat: 'https://example.com/javascript' },
+  { title: 'Création d’API REST avec Node.js', dateInscription: '2024-05-18', progression: 65, certificat: 'https://example.com/nodejs' },
 ];
 
 
@@ -77,7 +77,7 @@ course = [
       // Si aucune information n'est trouvée, rediriger vers la page de connexion
       alert('Utilisateur non connecté');
     }
-    
+
   }
 
   ngAfterViewInit(): void {

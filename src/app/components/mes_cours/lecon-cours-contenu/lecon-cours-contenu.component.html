@@ -13,6 +13,7 @@
           <div class="progress">
             <div class="progress-bar" [style.width]="progressWidth"></div>
           </div>
+          <input type="button" name="next-step" class="next-step" value="Suivant" (click)="nextStep()" />
           <br>
           <fieldset *ngIf="currentStep === 0">
             <h2>Leçon 1</h2>
@@ -35,7 +36,7 @@
               </div>
             </mat-card>
               <!-- Afficher le contenu complet -->
-            <input type="button" name="next-step" class="next-step" value="Next Step" (click)="nextStep()" />
+            <input type="button" name="next-step" class="next-step" value="Suivant" (click)="nextStep()" />
           </fieldset>
           <fieldset *ngIf="currentStep === 1">
             <h2>Leçon 2</h2>
@@ -58,8 +59,8 @@
               </div>
             </mat-card>
               <!-- Afficher le contenu complet -->
-            <input type="button" name="next-step" class="next-step" value="Next Step" (click)="nextStep()" />
-            <input type="button" name="previous-step" class="previous-step" value="Previous Step" (click)="previousStep()" />
+            <input type="button" name="next-step" class="next-step" value="Suivant" (click)="nextStep()" />
+            <input type="button" name="previous-step" class="previous-step" value="Précédent" (click)="previousStep()" />
           </fieldset>
           <fieldset *ngIf="currentStep === 2">
             <h2>Leçon 3</h2>
@@ -82,8 +83,8 @@
               </div>
             </mat-card>
               <!-- Afficher le contenu complet -->
-            <input type="button" name="next-step" class="next-step" value="Next Step" (click)="nextStep()" />
-            <input type="button" name="previous-step" class="previous-step" value="Previous Step" (click)="previousStep()" />
+            <input type="button" name="next-step" class="next-step" value="Suivant" (click)="nextStep()" />
+            <input type="button" name="previous-step" class="previous-step" value="Précédent" (click)="previousStep()" />
           </fieldset>
           <fieldset *ngIf="currentStep === 3">
             <h2>Quizz</h2>
@@ -106,8 +107,8 @@
               </div>
             </mat-card>
               <!-- Afficher le contenu complet -->
-            <input type="button" name="next-step" class="next-step" value="Next Step" (click)="nextStep()" />
-            <input type="button" name="previous-step" class="previous-step" value="Previous Step" (click)="previousStep()" />
+            <input type="button" name="next-step" class="next-step" value="Suivant" (click)="nextStep()" />
+            <input type="button" name="previous-step" class="previous-step" value="Précédent" (click)="previousStep()" />
           </fieldset>
           <fieldset *ngIf="currentStep === 4">
             <div class="finish">
@@ -145,7 +146,7 @@
 
               <button (click)="downloadPDF()" type="button" class="btn btn-outline-info add-course-btn">télecharger mon certificat </button>
             </div>
-            <input type="button" name="previous-step" class="previous-step" value="Previous Step" (click)="previousStep()" />
+            <input type="button" name="previous-step" class="previous-step" value="Précédent" (click)="previousStep()" />
           </fieldset>
         </form>
       </div>

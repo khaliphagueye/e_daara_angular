@@ -83,10 +83,10 @@
 
 <div  class="small-card">
   <!-- Formulaire pour ajouter un nouveau cours -->
-  <h3 class="form-title small fs-4"  style=" position: relative; /* or absolute */
+  <h3 class="section-title small fs-4"  style=" position: relative; /* or absolute */
   left: 1%;
   top: 50%;">Ajouter un Nouveau Cours</h3>
-  
+  <hr class="hr hr-blurry" />
   <form (ngSubmit)="onSubmit()" class="course-form">
     <div class="form-group">
       <label for="titre">Titre</label>
@@ -176,7 +176,7 @@
     </fieldset>
     <br>
     <fieldset>
-      <legend>Cours 4  :</legend>
+      <legend>Quizz :</legend>
       <div class="form-row">
         <div class="col">
           <label for="contenu7">Titre</label>
@@ -339,6 +339,18 @@ legend {
 input {
   margin: 5px;
 }
+
+
+.section-title {
+    margin-top: 10px; /* Diminue la marge au-dessus du titre */
+    margin-bottom: -10px; /* Diminue la marge en dessous du titre */
+}
+
+.hr-blurry {
+    margin-top: -10px; /* Diminue l'espace au-dessus de la ligne */
+    margin-bottom: 5px; /* Diminue l'espace en dessous de la ligne */
+}
+
 </style>
 
 
